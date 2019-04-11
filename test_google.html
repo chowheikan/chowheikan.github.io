@@ -20,12 +20,21 @@
   }
   // Make sure the client is loaded and sign-in is complete before calling this method.
   function execute() {
-    return gapi.client.youtube.channels.list({})
-        .then(function(response) {
-                // Handle the results here (response.result has the parsed body).
-                console.log("Response", response);
-              },
-              function(err) { console.error("Execute error", err); });
+    gapi.client.youtube.channels.list({
+          'part': 'snippet, contentDetails,statistics',
+          'forUsername': 'GoogleDevelopers'
+      }).then(function(response){
+        console.log(response);
+        var channel = response.result.items[0];
+        $("#result").val('This channel\'s ID is ' + channel.id + '. ' +
+        'Its title is \'' + channel.snippet.title + ', ' + 'and it has ' + channel.statistics.viewCount + ' views');
+      });
+    // return gapi.client.youtube.channels.list({})
+    //     .then(function(response) {
+    //             // Handle the results here (response.result has the parsed body).
+    //             console.log("Response", response);
+    //           },
+    //           function(err) { console.error("Execute error", err); });
   }
   gapi.load("client:auth2", function() {
     gapi.auth2.init({client_id: "669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com"});
@@ -34,9 +43,9 @@
   var CLIENT_ID = '669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com';
   var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
   var SCOPERS = 'https://www.googleapis.com/auth/youtube.readonly';
-
+  var clientInit
   function init() {
-      var clientInit = gapi.client.init({
+      clientInit = gapi.client.init({
         discoveryDocs: DISCOVERY_DOCS,
         clientId: CLIENT_ID,
         scope: SCOPERS
