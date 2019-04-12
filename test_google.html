@@ -10,17 +10,14 @@
    * https://developers.google.com/explorer-help/guides/code_samples#javascript
    */
 
-  function authenticate() {
-    return gapi.auth2.getAuthInstance()
-        .signIn({scope: "https://www.googleapis.com/auth/youtube.readonly"})
-        .then(function() { console.log("Sign-in successful"); },
-              function(err) { console.error("Error signing in", err); });
-  }
-  function loadClient() {
+   function loadClient() {
+    gapi.client.setApiKey("AIzaSyCLNYLDYcIO7PtEPqLpbIzKYOmRB4lDObk");
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
         .then(function() { console.log("GAPI client loaded for API"); },
               function(err) { console.error("Error loading GAPI client for API", err); });
   }
+
+  gapi.load("client");
   // Make sure the client is loaded and sign-in is complete before calling this method.
   function execute() {
     gapi.client.youtube.channels.list({
@@ -45,7 +42,7 @@
     var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
     var SCOPERS = 'https://www.googleapis.com/auth/youtube.readonly';
 
-      gapi.client.init({
+      return gapi.client.init({
         discoveryDocs: DISCOVERY_DOCS,
         clientId: CLIENT_ID,
         scope: SCOPERS
@@ -107,16 +104,13 @@
 
   }
 
-  gapi.load("client:auth2", function() {
-        // gapi.auth2.init({client_id: "669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com"});
-    init();
-    // searchList();
-  });
+  // gapi.load("client:auth2", function() {
+  //       // gapi.auth2.init({client_id: "669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com"});
+  //   var initApi = init();
+  //   console(initApi);
+  //   // searchList();
+  // });
   
-  
-  $( document ).ready(function() {
-    searchList();
-  });
 </script>
 <!-- <button onclick="authenticate().then(loadClient)">authorize and load</button>
 <button onclick="execute()">execute</button>
