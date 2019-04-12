@@ -65,16 +65,19 @@
       if (items) {  
         items.forEach(function(searchResult) {
           var videoId = searchResult.id.videoId;
+          var snippet = searchResult.snippet;
+          var title = snippet.title;
+          var description = snippet.description;
           console.log("VideoId: "+ videoId);
 
-          appendVideo("https://www.youtube.com/embed/" + videoId);
+          appendVideo("https://www.youtube.com/embed/" + videoId, title, description);
         });       
       }
     },
     function(err) { console.error("Execute error", err); });
   }
 
-  function appendVideo(src) {
+  function appendVideo(src, title, description) {
     $("#videoContainer").append(
       '<div class="card" style="width: 560;">' + 
       '<iframe ' + 
@@ -87,9 +90,9 @@
       'allowfullscreen>' + 
       '</iframe>' + 
       '<div class="card-body">' + 
-      '<h5 class="card-title">Card title</h5>' + 
-      '<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>' + 
-      '<a href="#" class="btn btn-primary">Go somewhere</a>' + 
+      '<h5 class="card-title">' + title + '</h5>' + 
+      '<p class="card-text">' + description + '</p>' + 
+      // '<a href="#" class="btn btn-primary">Go somewhere</a>' + 
       '</div>' + 
       '</div>'
     );  
