@@ -34,26 +34,7 @@
         $("#result").val('This channel\'s ID is ' + channel.id + '. ' +
         'Its title is \'' + channel.snippet.title + ', ' + 'and it has ' + channel.statistics.viewCount + ' views');
       });
-    // return gapi.client.youtube.channels.list({})
-    //     .then(function(response) {
-    //             // Handle the results here (response.result has the parsed body).
-    //             console.log("Response", response);
-    //           },
-    //           function(err) { console.error("Execute error", err); });
   }
-  
-  // function init() {
-  //   var CLIENT_ID = '669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com';
-  //   var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
-  //   var SCOPERS = 'https://www.googleapis.com/auth/youtube.readonly';
-
-  //     return gapi.client.init({
-  //       discoveryDocs: DISCOVERY_DOCS,
-  //       clientId: CLIENT_ID,
-  //       scope: SCOPERS
-  //     })
-
-  // }
 
   function getChannel() {
       gapi.client.youtube.channels.list({
@@ -73,7 +54,8 @@
       part: "snippet",
       maxResults: "5",
       type: "video",
-      videoEmbeddable: "true"
+      videoEmbeddable: "true",
+      order: "date"
     }).then(function(response) {
       // Handle the results here (response.result has the parsed body).
       console.log("Response", response);
@@ -116,7 +98,6 @@
 <button onclick="init().then(searchList)">init and search</button>
 <button onclick="searchList()">search</button>
 <input type="text" id="result"></input> -->
-
 
 
 <div id="videoContainer">
