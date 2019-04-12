@@ -39,12 +39,7 @@
     //           },
     //           function(err) { console.error("Execute error", err); });
   }
-  gapi.load("client:auth2", function() {
-    gapi.auth2.init({client_id: "669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com"});
-  });
-
-  $("#videoEmbed").hide();
-
+  
   var CLIENT_ID = '669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com';
   var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
   var SCOPERS = 'https://www.googleapis.com/auth/youtube.readonly';
@@ -112,13 +107,18 @@
       '</div>' + 
       '</div>'
     );
+
+    gapi.load("client:auth2", function() {
+      gapi.auth2.init({client_id: "669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com"});
+    });
+    init.then(searchList);
   }
 </script>
-<button onclick="authenticate().then(loadClient)">authorize and load</button>
+<!-- <button onclick="authenticate().then(loadClient)">authorize and load</button>
 <button onclick="execute()">execute</button>
 <button onclick="init()">init</button>
 <button onclick="searchList()">search</button>
-<input type="text" id="result"></input>
+<input type="text" id="result"></input> -->
 
 
 
