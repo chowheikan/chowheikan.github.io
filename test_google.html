@@ -88,10 +88,30 @@
       var videoId = searchResult.id.videoId;
       console.log("VideoId: "+ videoId);
 
-      $("#videoEmbed").attr("src", "https://www.youtube.com/embed/" + videoId);
-      $("#videoEmbed").show();
+      appendVideo("https://www.youtube.com/embed/" + videoId);
     },
     function(err) { console.error("Execute error", err); });
+  }
+
+  function appendVideo(src) {
+    $("#videoContainer").append(
+      '<div class="card" style="width: 560;">' + 
+      '<iframe ' + 
+      'id="videoEmbed"' + 
+      'width="560" ' + 
+      'src="' + src + '"' +
+      'height="315" 	' + 
+      'frameborder="0"' + 
+      'allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" ' + 
+      'allowfullscreen>' + 
+      '</iframe>' + 
+      '<div class="card-body">' + 
+      '<h5 class="card-title">Card title</h5>' + 
+      '<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>' + 
+      '<a href="#" class="btn btn-primary">Go somewhere</a>' + 
+      '</div>' + 
+      '</div>'
+    );
   }
 </script>
 <button onclick="authenticate().then(loadClient)">authorize and load</button>
@@ -102,18 +122,7 @@
 
 
 
-<div class="card" style="width: 560;">
-  <iframe 
-    id="videoEmbed"
-    width="560" 
-    height="315" 	
-    frameborder="0"
-    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
-  </iframe>
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
+<div id="videoContainer">
+
+
 </div>
