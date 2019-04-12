@@ -85,7 +85,7 @@
       var videoId = searchResult.id.videoId;
       console.log("VideoId: "+ videoId);
 
-      $("#videoEmbed").attr("src", videoId);
+      $("#videoEmbed").attr("src", "https://www.youtube.com/embed/" + videoId);
       $("#videoEmbed").show();
     },
     function(err) { console.error("Execute error", err); });
