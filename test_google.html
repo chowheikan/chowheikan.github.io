@@ -10,11 +10,60 @@
    * https://developers.google.com/explorer-help/guides/code_samples#javascript
    */
 
-  function loadClient() {
+   function loadClient() {
     gapi.client.setApiKey("AIzaSyCLNYLDYcIO7PtEPqLpbIzKYOmRB4lDObk");
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
         .then(function() { console.log("GAPI client loaded for API"); },
               function(err) { console.error("Error loading GAPI client for API", err); });
+  }
+
+  gapi.load("client", function() {
+        // gapi.auth2.init({client_id: "669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com"});
+    var initApi = loadClient();
+    console.log(initApi);
+  });
+  // Make sure the client is loaded and sign-in is complete before calling this method.
+  function execute() {
+    gapi.client.youtube.channels.list({
+          'part': 'snippet, contentDetails,statistics',
+          'forUsername': 'GoogleDevelopers'
+      }).then(function(response){
+        console.log(response);
+        var channel = response.result.items[0];
+        $("#result").val('This channel\'s ID is ' + channel.id + '. ' +
+        'Its title is \'' + channel.snippet.title + ', ' + 'and it has ' + channel.statistics.viewCount + ' views');
+      });
+    // return gapi.client.youtube.channels.list({})
+    //     .then(function(response) {
+    //             // Handle the results here (response.result has the parsed body).
+    //             console.log("Response", response);
+    //           },
+    //           function(err) { console.error("Execute error", err); });
+  }
+  
+  function init() {
+    var CLIENT_ID = '669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com';
+    var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
+    var SCOPERS = 'https://www.googleapis.com/auth/youtube.readonly';
+
+      return gapi.client.init({
+        discoveryDocs: DISCOVERY_DOCS,
+        clientId: CLIENT_ID,
+        scope: SCOPERS
+      })
+
+  }
+
+  function getChannel() {
+      gapi.client.youtube.channels.list({
+          'part': 'snippet, contentDetails,statistics',
+          'forUsername': 'GoogleDevelopers'
+      }).then(function(response){
+        console.log(response);
+        var channel = response.result.items[0];
+        $("#result").val('This channel\'s ID is ' + channel.id + '. ' +
+        'Its title is \'' + channel.snippet.title + ', ' + 'and it has ' + channel.statistics.viewCount + ' views');
+      });
   }
 
   function searchList() {
@@ -56,58 +105,6 @@
       '</div>' + 
       '</div>'
     );  
-
-  gapi.load("client", function() {
-        // gapi.auth2.init({client_id: "669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com"});
-    var initApi = loadClient();
-    // initApi.then(searchList);
-    console.log(initApi);
-  });
-  // Make sure the client is loaded and sign-in is complete before calling this method.
-  function execute() {
-    gapi.client.youtube.channels.list({
-          'part': 'snippet, contentDetails,statistics',
-          'forUsername': 'GoogleDevelopers'
-      }).then(function(response){
-        console.log(response);
-        var channel = response.result.items[0];
-        $("#result").val('This channel\'s ID is ' + channel.id + '. ' +
-        'Its title is \'' + channel.snippet.title + ', ' + 'and it has ' + channel.statistics.viewCount + ' views');
-      });
-    // return gapi.client.youtube.channels.list({})
-    //     .then(function(response) {
-    //             // Handle the results here (response.result has the parsed body).
-    //             console.log("Response", response);
-    //           },
-    //           function(err) { console.error("Execute error", err); });
-  }
-  
-  // function init() {
-  //   var CLIENT_ID = '669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com';
-  //   var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
-  //   var SCOPERS = 'https://www.googleapis.com/auth/youtube.readonly';
-
-  //     return gapi.client.init({
-  //       discoveryDocs: DISCOVERY_DOCS,
-  //       clientId: CLIENT_ID,
-  //       scope: SCOPERS
-  //     })
-
-  // }
-
-  // function getChannel() {
-  //     gapi.client.youtube.channels.list({
-  //         'part': 'snippet, contentDetails,statistics',
-  //         'forUsername': 'GoogleDevelopers'
-  //     }).then(function(response){
-  //       console.log(response);
-  //       var channel = response.result.items[0];
-  //       $("#result").val('This channel\'s ID is ' + channel.id + '. ' +
-  //       'Its title is \'' + channel.snippet.title + ', ' + 'and it has ' + channel.statistics.viewCount + ' views');
-  //     });
-  // }
-
-  
 
   }
 
