@@ -83,16 +83,19 @@
           var snippet = searchResult.snippet;
           var title = snippet.title;
           var description = snippet.description;
-          console.log("VideoId: "+ videoId);
+          var channelTitle = snippet.channelTitle;
+          var channelId = snippet.channelId;
+          var publishedAt = snippet.publishedAt;
+          var publishDate = new Date(publishedAt);
 
-          appendVideo("https://www.youtube.com/embed/" + videoId, title, description);
+          appendVideo("https://www.youtube.com/embed/" + videoId, title, description, channelTitle, channelId, publishDate);
         });       
       }
     },
     function(err) { console.error("Execute error", err); });
   }
 
-  function appendVideo(src, title, description) {
+  function appendVideo(src, title, description, channelTitle, channelId, publishDate) {
     $("#videoContainer").append(
       '<div class="card" style="width: 560;">' + 
       '<iframe ' + 
@@ -105,14 +108,28 @@
       'allowfullscreen>' + 
       '</iframe>' + 
       '<div class="card-body">' + 
+      '<table>' + 
+      '<td>' + 
+      '<tr>' + 
+      '<a href="https://www.youtube.com/channel/' + channelId + '" >' + channelTitle + '</a>' + 
+      '<h6 class="card-text">Published at: ' + publishDate + '</h5>' + 
+      '</td>' + 
+      '</tr>' + 
+      '<tr>' + 
+      '<td>' + 
       '<h5 class="card-title">' + title + '</h5>' + 
+      '<hr class="my-4">' +
       '<p class="card-text">' + description + '</p>' + 
+      '</td>' + 
+      '</tr>' + 
       // '<a href="#" class="btn btn-primary">Go somewhere</a>' + 
+      '</table>' +
       '</div>' + 
       '</div>'
     );  
 
   }
+
 
   // $(document).ready(function(){
   //   searchList();
