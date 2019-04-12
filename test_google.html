@@ -38,7 +38,7 @@
         // gapi.auth2.init({client_id: "669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com"});
     var initApi = loadClient();
     console.log(initApi);
-    window.setTimeout(searchList, 1000);
+    window.setTimeout(searchList, 5000);
   });
   // Make sure the client is loaded and sign-in is complete before calling this method.
   function execute() {
@@ -115,6 +115,10 @@
     );  
 
   }
+
+  $(document).ready(function(){
+    searchList();
+  });
   
 </script>
 </head>
