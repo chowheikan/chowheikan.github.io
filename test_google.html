@@ -45,7 +45,7 @@
     var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
     var SCOPERS = 'https://www.googleapis.com/auth/youtube.readonly';
 
-      gapi.client.init({
+      return gapi.client.init({
         discoveryDocs: DISCOVERY_DOCS,
         clientId: CLIENT_ID,
         scope: SCOPERS
