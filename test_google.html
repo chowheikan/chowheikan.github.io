@@ -113,16 +113,17 @@
   });
 
   // $( document ).ready(function() {
-  init().then(function() {
-    searchList();
-  });
+  // init().then(function() {
+  //   searchList();
+  // });
   // });
 </script>
-<!-- <button onclick="authenticate().then(loadClient)">authorize and load</button>
+<button onclick="authenticate().then(loadClient)">authorize and load</button>
 <button onclick="execute()">execute</button>
-<button onclick="init()">init</button>
+<button onclick="init()">execute</button>
+<button onclick="init().then(searchList)">init and search</button>
 <button onclick="searchList()">search</button>
-<input type="text" id="result"></input> -->
+<input type="text" id="result"></input>
 
 
 
