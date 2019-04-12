@@ -45,7 +45,7 @@
     var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
     var SCOPERS = 'https://www.googleapis.com/auth/youtube.readonly';
 
-      return gapi.client.init({
+      gapi.client.init({
         discoveryDocs: DISCOVERY_DOCS,
         clientId: CLIENT_ID,
         scope: SCOPERS
@@ -107,22 +107,18 @@
 
   }
 
-  gapi.load("client:auth2", function() {
-        gapi.auth2.init({client_id: "669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com"});
+  init();
+  
+  $( document ).ready(function() {
+    searchList();
   });
-
-  // $( document ).ready(function() {
-  // init().then(function() {
-  //   searchList();
-  // });
-  // });
 </script>
-<button onclick="authenticate().then(loadClient)">authorize and load</button>
+<!-- <button onclick="authenticate().then(loadClient)">authorize and load</button>
 <button onclick="execute()">execute</button>
 <button onclick="init()">execute</button>
 <button onclick="init().then(searchList)">init and search</button>
 <button onclick="searchList()">search</button>
-<input type="text" id="result"></input>
+<input type="text" id="result"></input> -->
 
 
 
