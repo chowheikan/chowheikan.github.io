@@ -27,7 +27,7 @@
    * https://developers.google.com/explorer-help/guides/code_samples#javascript
    */
 
-   function loadClient() {
+   function loadClientAndSearch() {
     gapi.client.setApiKey("AIzaSyCLNYLDYcIO7PtEPqLpbIzKYOmRB4lDObk");
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
         .then(function() { console.log("GAPI client loaded for API"); searchList(); },
@@ -36,9 +36,7 @@
 
   gapi.load("client", function() {
         // gapi.auth2.init({client_id: "669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com"});
-    var initApi = loadClient();
-    console.log(initApi);
-    window.setTimeout(searchList, 5000);
+    loadClientAndSearch();
   });
   // Make sure the client is loaded and sign-in is complete before calling this method.
   function execute() {
