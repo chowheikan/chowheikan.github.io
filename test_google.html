@@ -108,12 +108,14 @@
   }
 
   gapi.load("client:auth2", function() {
-        gapi.auth2.init({client_id: "669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com"});
+        // gapi.auth2.init({client_id: "669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com"});
+    init();
+    searchList();
   });
-  init();
+  
   
   $( document ).ready(function() {
-    searchList();
+    
   });
 </script>
 <!-- <button onclick="authenticate().then(loadClient)">authorize and load</button>
