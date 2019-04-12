@@ -17,7 +17,11 @@
               function(err) { console.error("Error loading GAPI client for API", err); });
   }
 
-  gapi.load("client");
+  gapi.load("client", function() {
+        // gapi.auth2.init({client_id: "669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com"});
+    var initApi = loadClient();
+    console(initApi);
+  });
   // Make sure the client is loaded and sign-in is complete before calling this method.
   function execute() {
     gapi.client.youtube.channels.list({
