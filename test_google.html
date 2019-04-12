@@ -40,10 +40,14 @@
     gapi.auth2.init({client_id: "669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com"});
   });
 
+  $("#videoEmbed").hide();
+
   var CLIENT_ID = '669658571519-k0kf7okgs8mllgknbhkiehrccvc5e8au.apps.googleusercontent.com';
   var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
   var SCOPERS = 'https://www.googleapis.com/auth/youtube.readonly';
-  var clientInit
+  var clientInit;
+
+
   function init() {
       clientInit = gapi.client.init({
         discoveryDocs: DISCOVERY_DOCS,
@@ -65,9 +69,40 @@
         'Its title is \'' + channel.snippet.title + ', ' + 'and it has ' + channel.statistics.viewCount + ' views');
       });
   }
+
+  function searchList() {
+    gapi.client.youtube.search.list({
+      q: "lck 2019",
+      part: "snippet",
+      maxResults: "5",
+      type: "video",
+      videoEmbeddable: "true"
+    }).then(function(response) {
+      // Handle the results here (response.result has the parsed body).
+      console.log("Response", response);
+
+      var searchResult = response.result.items[0];
+      var videoId = searchResult.id.videoId;
+      console.log("VideoId: "+ videoId);
+
+      $("#videoEmbed").attr("src", videoId);
+      $("#videoEmbed").show();
+    },
+    function(err) { console.error("Execute error", err); });
+  }
 </script>
 <button onclick="authenticate().then(loadClient)">authorize and load</button>
 <button onclick="execute()">execute</button>
 <button onclick="init()">init</button>
-<button onclick="getChannel()">init</button>
+<button onclick="searchList()">search</button>
 <input type="text" id="result"></input>
+
+<iframe 
+    id="videoEmbed"
+    width="560" 
+    height="315" 	
+    frameborder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+</iframe>
+
