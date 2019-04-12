@@ -60,11 +60,16 @@
       // Handle the results here (response.result has the parsed body).
       console.log("Response", response);
 
-      var searchResult = response.result.items[0];
-      var videoId = searchResult.id.videoId;
-      console.log("VideoId: "+ videoId);
+      var items = response.result.items;
 
-      appendVideo("https://www.youtube.com/embed/" + videoId);
+      if (items) {  
+        items.forEach(function(searchResult) {
+          var videoId = searchResult.id.videoId;
+          console.log("VideoId: "+ videoId);
+
+          appendVideo("https://www.youtube.com/embed/" + videoId);
+        });       
+      }
     },
     function(err) { console.error("Execute error", err); });
   }
